@@ -14,7 +14,7 @@
 .prototype-viewer .main-content { transform: translateZ(0); }
 .prototype-viewer .main-scroll { overscroll-behavior: none; }
 .prototype-close {
-  position: absolute; top: max(16px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); z-index: 5;
+  position: absolute; top: max(16px, env(safe-area-inset-top)); left: max(16px, env(safe-area-inset-left)); z-index: 5;
   display: flex; align-items: center; justify-content: center; gap: 6px; height: 44px; padding: 0 16px 0 12px;
   border-radius: 999px; background: #f2f2f2; color: #404040; font-size: 15px; font-weight: 500;
 }
