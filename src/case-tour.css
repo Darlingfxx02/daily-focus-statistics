@@ -1,0 +1,69 @@
+.case-canvas { display: block; width: min(100%, 1440px); margin-inline: auto; padding: 0 48px 100px; font-family: 'Inter Variable', sans-serif; }
+.case-intro { position: absolute; display: flex; flex-direction: column; margin: 0; overflow: hidden; pointer-events: auto; }
+.intro-copy { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; padding-top: max(0px, calc((100svh - 640px) / 2)); }
+.case-presentation { position: relative; }
+.comparison-stage { position: sticky; top: 0; height: 100svh; z-index: 2; pointer-events: none; }
+.compare-devices { position: absolute; top: 0; left: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; transform-origin: top left; will-change: transform; }
+.device-column { min-width: 0; will-change: transform, opacity; }
+[data-case-device="before"] { opacity: 0; }
+.device-caption { height: 36px; color: #262626; text-align: center; font-size: 18px; line-height: 30px; font-weight: 500; }
+.comparison-stage .case-preview { position: relative; inset: auto; width: 100%; max-width: none; margin: 0; pointer-events: auto; }
+.comparison-stage[data-mode="guided"] .case-preview { pointer-events: none; }
+.before-app, .before-scroll { width: 100%; height: 100%; background: white; }
+.before-scroll { overflow-y: auto; scrollbar-width: none; overscroll-behavior: contain; }
+.before-scroll::-webkit-scrollbar { display: none; }
+.original-canvas { position: relative; width: 390px; height: 1238px; overflow: hidden; }
+/* Keep the two screen textures promoted between scenes. Recreating their
+   compositor layers at every anchor makes the first movement frame stall. */
+.comparison-stage .main-content, .original-canvas { transform: translateZ(0); will-change: transform; }
+.before-preview .device-screen { filter: none; }
+.original-screenshot { position: absolute; left: -24px; top: -20px; width: 438px; max-width: none; height: 1286px; user-select: none; }
+.original-anchor { position: absolute; pointer-events: none; }
+.tour-explanation { position: absolute; display: flex; flex-direction: column; pointer-events: auto; opacity: 0; }
+.tour-copy { flex: 1; min-height: 0; display: flex; flex-direction: column; padding-top: max(0px, calc((100svh - 640px) / 2)); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.tour-copy-content { flex: none; margin-block: 0; }
+.tour-copy h2 { color: #262626; font-size: 24px; line-height: 32px; font-weight: 600; letter-spacing: -.45px; margin: 0 0 20px; text-wrap: balance; }
+.tour-copy p, .tour-instruction { color: #545454; font-size: 18px; line-height: 30px; }
+.tour-copy p + p { margin-top: 16px; }
+.tour-controls { display: grid; flex: none; grid-template-columns: 44px 45px 44px max-content; align-items: center; justify-content: start; gap: 8px; margin-top: 24px; }
+.tour-controls button { height: 44px; min-width: 44px; padding: 0 12px; border-radius: 100px; background: #f2f2f2; color: #404040; font-size: 18px; line-height: 30px; }
+.tour-controls button:active { transform: none; }
+.tour-controls button:disabled { opacity: .35; }
+.tour-controls span { min-width: 45px; text-align: center; color: #666666; font-size: 18px; line-height: 30px; }
+.tour-controls .tour-free { width: max-content; }
+.tour-instruction, .case-intro .tour-instruction { margin-top: 12px; color: #737373; }
+.tour-overlay { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; transition: opacity 200ms ease; }
+.tour-overlay.is-transitioning { opacity: 0; }
+.tour-overlay .tour-outline, .tour-overlay .tour-arrow { transition: opacity 220ms ease; }
+.tour-overlay.is-transitioning .tour-outline, .tour-overlay.is-transitioning .tour-arrow { opacity: 0; }
+.tour-track { position: relative; margin-top: -100svh; pointer-events: none; }
+.tour-intro-stop, .tour-stop { height: 100svh; }
+.tour-exit { height: 65svh; pointer-events: none; }
+.case-story { position: relative; z-index: 3; display: flex; flex-direction: column; gap: 44px; margin-right: auto; padding-top: 32px; }
+@media (max-width: 1055px) {
+  .case-canvas { padding: 0 24px 64px; }
+}
+.comparison-stage[data-compact="true"] .compare-devices { gap: 12px; }
+.comparison-stage[data-compact="true"] .tour-controls { margin-top: 12px; }
+.comparison-stage[data-compact="true"] .tour-instruction { display: none; }
+.comparison-stage[data-compact="true"] .tour-copy h2 { margin-bottom: 12px; }
+.comparison-stage[data-compact="true"] .tour-copy-content { margin-block: 0; }
+.comparison-stage[data-compact="true"] .case-intro { justify-content: flex-start; }
+.comparison-stage[data-compact="true"] .tour-copy, .comparison-stage[data-compact="true"] .intro-copy { padding-top: 0; }
+.comparison-stage[data-compact="true"] .tour-controls { grid-template-columns: 44px 45px 44px max-content; }
+.comparison-stage[data-compact="true"] .tour-free { grid-column: auto; margin-top: 0; }
+@media (max-width: 480px) {
+  .case-canvas { padding: 0 20px 64px; }
+  .tour-controls { gap: 4px; }
+  .tour-controls .tour-free { margin-left: 0; padding-inline: 10px; }
+  .comparison-stage[data-compact="true"] .tour-controls { grid-template-columns: 44px 45px 44px; }
+  .comparison-stage[data-compact="true"] .tour-free { grid-column: 1 / -1; }
+}
+@media (prefers-reduced-motion: reduce) { .tour-overlay, .tour-overlay .tour-outline, .tour-overlay .tour-arrow { transition: none; } }
+@media print {
+  .comparison-stage { position: relative; height: auto; }
+  .tour-explanation, .tour-overlay, .compare-devices, .tour-track, .tour-exit { display: none; }
+  .case-story { width: 100% !important; }
+}
+
+.tour-controls button:focus-visible { outline: 2px solid #737373; outline-offset: 3px; }

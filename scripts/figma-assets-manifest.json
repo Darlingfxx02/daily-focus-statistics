@@ -1,0 +1,228 @@
+{
+  "img24SolidProfileCircle": {
+    "path": "public/assets/figma/img24SolidProfileCircle.svg",
+    "width": "32",
+    "height": "32",
+    "viewBox": "0 0 32 32",
+    "bytes": 854
+  },
+  "imgVuesaxBoldChartSquare": {
+    "path": "public/assets/figma/imgVuesaxBoldChartSquare.svg",
+    "width": "32",
+    "height": "32",
+    "viewBox": "0 0 32 32",
+    "bytes": 1150
+  },
+  "img24SolidForkKnife": {
+    "path": "public/assets/figma/img24SolidForkKnife.svg",
+    "width": "20",
+    "height": "20",
+    "viewBox": "0 0 20 20",
+    "bytes": 1895
+  },
+  "img24SolidWalking": {
+    "path": "public/assets/figma/img24SolidWalking.svg",
+    "width": "20",
+    "height": "20",
+    "viewBox": "0 0 20 20",
+    "bytes": 1786
+  },
+  "img24SolidScales": {
+    "path": "public/assets/figma/img24SolidScales.svg",
+    "width": "20",
+    "height": "20",
+    "viewBox": "0 0 20 20",
+    "bytes": 904
+  },
+  "img24OutlinePlus": {
+    "path": "public/assets/figma/img24OutlinePlus.svg",
+    "width": "17.5",
+    "height": "17.5",
+    "viewBox": "0 0 17.5 17.5",
+    "bytes": 505,
+    "sourceNode": "I48:2347;27392:227030;5473:68587",
+    "note": "Direct visible vector export resolves the instance-swap placeholder from the full-screen context."
+  },
+  "img24SolidWalking1": {
+    "path": "public/assets/figma/img24SolidWalking1.svg",
+    "width": "16",
+    "height": "16",
+    "viewBox": "0 0 16 16",
+    "bytes": 1762
+  },
+  "img24OutlineDumbbell": {
+    "path": "public/assets/figma/img24OutlineDumbbell.svg",
+    "width": "16",
+    "height": "16",
+    "viewBox": "0 0 16 16",
+    "bytes": 1211
+  },
+  "imgCircleQuestionMark": {
+    "path": "public/assets/figma/imgCircleQuestionMark.svg",
+    "width": "20",
+    "height": "20",
+    "viewBox": "0 0 20 20",
+    "bytes": 1105
+  },
+  "imgTrack": {
+    "path": "public/assets/figma/imgTrack.svg",
+    "width": "326",
+    "height": "144",
+    "viewBox": "0 0 326 144",
+    "bytes": 3268
+  },
+  "imgTrack1": {
+    "path": "public/assets/figma/imgTrack1.svg",
+    "width": "326",
+    "height": "144",
+    "viewBox": "0 0 326 144",
+    "bytes": 2765
+  },
+  "imgProgress": {
+    "path": "public/assets/figma/imgProgress.svg",
+    "width": "326",
+    "height": "144",
+    "viewBox": "0 0 326 144",
+    "bytes": 1706
+  },
+  "imgTrack2": {
+    "path": "public/assets/figma/imgTrack2.svg",
+    "width": "326",
+    "height": "144",
+    "viewBox": "0 0 326 144",
+    "bytes": 2117
+  },
+  "imgProgress1": {
+    "path": "public/assets/figma/imgProgress1.svg",
+    "width": "326",
+    "height": "144",
+    "viewBox": "0 0 326 144",
+    "bytes": 1130
+  },
+  "imgProgress2": {
+    "path": "public/assets/figma/imgProgress2.svg",
+    "width": "326",
+    "height": "144",
+    "viewBox": "0 0 326 144",
+    "bytes": 2547
+  },
+  "imgBgGradient": {
+    "path": "public/assets/figma/imgBgGradient.svg",
+    "width": "1191.7",
+    "height": "1174.79",
+    "viewBox": "0 0 1191.7 1174.79",
+    "bytes": 6222
+  },
+  "imgCap": {
+    "path": "public/assets/figma/imgCap.svg",
+    "width": "1.32804",
+    "height": "4.07547",
+    "viewBox": "0 0 1.32804 4.07547",
+    "bytes": 342
+  },
+  "imgWifi": {
+    "path": "public/assets/figma/imgWifi.svg",
+    "width": "17.1417",
+    "height": "12.3283",
+    "viewBox": "0 0 17.1417 12.3283",
+    "bytes": 1627
+  },
+  "imgCellularConnection": {
+    "path": "public/assets/figma/imgCellularConnection.svg",
+    "width": "19.2",
+    "height": "12.2264",
+    "viewBox": "0 0 19.2 12.2264",
+    "bytes": 1173
+  },
+  "imgVuesaxBoldChartSquare1": {
+    "path": "public/assets/figma/imgVuesaxBoldChartSquare1.svg",
+    "width": "24",
+    "height": "24",
+    "viewBox": "0 0 24 24",
+    "bytes": 908
+  },
+  "img24SolidCalendar": {
+    "path": "public/assets/figma/img24SolidCalendar.svg",
+    "width": "24",
+    "height": "24",
+    "viewBox": "0 0 24 24",
+    "bytes": 1666
+  },
+  "imgVector234255998": {
+    "path": "public/assets/figma/imgVector234255998.svg",
+    "width": "358",
+    "height": "1",
+    "viewBox": "0 0 358 1",
+    "bytes": 235
+  },
+  "img24SolidForkKnife1": {
+    "path": "public/assets/figma/img24SolidForkKnife1.svg",
+    "width": "20",
+    "height": "20",
+    "viewBox": "0 0 20 20",
+    "bytes": 1895
+  },
+  "img24SolidCupWater": {
+    "path": "public/assets/figma/img24SolidCupWater.svg",
+    "width": "20",
+    "height": "20",
+    "viewBox": "0 0 20 20",
+    "bytes": 741
+  },
+  "img24SolidFire": {
+    "path": "public/assets/figma/img24SolidFire.svg",
+    "width": "20",
+    "height": "20",
+    "viewBox": "0 0 20 20",
+    "bytes": 737
+  },
+  "img24SolidFire1": {
+    "path": "public/assets/figma/img24SolidFire1.svg",
+    "width": "20",
+    "height": "20",
+    "viewBox": "0 0 20 20",
+    "bytes": 737
+  },
+  "imgVector234255960": {
+    "path": "public/assets/figma/imgVector234255960.svg",
+    "width": "326",
+    "height": "1",
+    "viewBox": "0 0 326 1",
+    "bytes": 235
+  },
+  "img24SolidCupWater1": {
+    "path": "public/assets/figma/img24SolidCupWater1.svg",
+    "width": "20",
+    "height": "20",
+    "viewBox": "0 0 20 20",
+    "bytes": 741
+  },
+  "imgFrame2147224712": {
+    "path": "public/assets/figma/imgFrame2147224712.svg",
+    "width": "16",
+    "height": "16",
+    "viewBox": "0 0 16 16",
+    "bytes": 416
+  },
+  "imgFrame2147224715": {
+    "path": "public/assets/figma/imgFrame2147224715.svg",
+    "width": "16",
+    "height": "16",
+    "viewBox": "0 0 16 16",
+    "bytes": 416
+  },
+  "img24SolidSleep": {
+    "path": "public/assets/figma/img24SolidSleep.svg",
+    "width": "20",
+    "height": "20",
+    "viewBox": "0 0 20 20",
+    "bytes": 941
+  },
+  "imgTabbarIconChatAi": {
+    "path": "public/assets/figma/imgTabbarIconChatAi.svg",
+    "width": "44",
+    "height": "44",
+    "viewBox": "0 0 44 44",
+    "bytes": 4263
+  }
+}

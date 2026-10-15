@@ -1,0 +1,34 @@
+.prototype-viewer {
+  position: fixed; inset: 0; margin: 0; width: 100%; height: 100dvh;
+  max-width: none; max-height: none; padding: 0; border: 0; border-radius: 0;
+  overflow: hidden; overscroll-behavior: none; background: transparent; box-shadow: none;
+}
+.prototype-viewer[open] { display: block; animation: none; }
+.prototype-viewer::backdrop { background: transparent; backdrop-filter: none; }
+.prototype-scrim { position: absolute; inset: 0; background: #fff; }
+.prototype-stage { position: absolute; inset: 0; display: grid; place-items: center; }
+.prototype-viewer .case-preview { position: relative; margin: 0; max-width: none; pointer-events: auto; transform-origin: top left; }
+.prototype-viewer[data-phase="opening"] .prototype-stage, .prototype-viewer[data-phase="closing"] .prototype-stage { pointer-events: none; }
+.prototype-viewer[data-phase="opening"] .case-preview, .prototype-viewer[data-phase="closing"] .case-preview { pointer-events: none; will-change: transform; }
+.prototype-placeholder { visibility: hidden; pointer-events: none; }
+.prototype-viewer .main-content { transform: translateZ(0); }
+.prototype-viewer .main-scroll { overscroll-behavior: none; }
+.prototype-close {
+  position: absolute; top: max(16px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); z-index: 5;
+  display: flex; align-items: center; justify-content: center; gap: 6px; height: 44px; padding: 0 16px 0 12px;
+  border-radius: 999px; background: #f2f2f2; color: #404040; font-size: 15px; font-weight: 500;
+}
+.prototype-close svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.prototype-close:active { transform: none; }
+@media (max-width: 600px), (pointer: coarse) and (max-height: 600px) {
+  .prototype-scrim { background: var(--page-surface); }
+  .prototype-viewer .case-preview { width: 100%; height: 100%; aspect-ratio: auto; }
+  .prototype-viewer .device-shell { inset: 0; width: 100%; height: 100%; transform: none; }
+  .prototype-viewer .device-screen { inset: 0; width: 100%; height: 100%; border-radius: 0; filter: none; }
+  .prototype-viewer .device-frame, .prototype-viewer .status-bar, .prototype-viewer .home-indicator { display: none; }
+  .prototype-viewer .phone { --status-height: calc(52px + env(safe-area-inset-top)); --nav-bottom: max(12px, env(safe-area-inset-bottom)); }
+  .prototype-viewer .progress-hero { padding-top: calc(60px + env(safe-area-inset-top)); }
+  .prototype-close { top: calc(4px + env(safe-area-inset-top)); left: max(12px, env(safe-area-inset-left)); right: auto; height: 44px; background: rgb(255 255 255 / .94); }
+}
+
+.prototype-close:focus-visible { outline: 2px solid #737373; outline-offset: 3px; }

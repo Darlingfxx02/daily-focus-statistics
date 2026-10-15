@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.DS_Store
+.env
+.env.*
+!.env.example
+test-results/
+.vite/
+
+# Local research, working history and verification screenshots.
+/assets/
+/references/
+/WORK_LOG.md
+/AGENTS.md
+/visual-culture.json

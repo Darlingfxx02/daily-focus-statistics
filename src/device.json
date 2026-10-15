@@ -1,0 +1,17 @@
+{
+  "id": "iphone-17-pro-max-deep-blue",
+  "model": "iPhone 17 Pro Max",
+  "color": "Deep Blue",
+  "frame": "dresser/iphone-17-pro-max-deep-blue.png",
+  "width": 1470,
+  "height": 3000.0,
+  "screen": {
+    "x": 76,
+    "y": 67,
+    "width": 1318,
+    "height": 2866.0,
+    "radius": "9% / 4.2%"
+  },
+  "source": "Local Dresser mirror; original PNG, unchanged",
+  "sha256": "807cf3e6175e77cea8fba6952d295fe1b9199c8133d2236a8e17f318eaf65fa8"
+}

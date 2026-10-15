@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="326" height="144" viewBox="0 0 326 144" fill="none" preserveAspectRatio="none" style="display:block">
+<!-- Two broad radial fields: a subtle hue shift at consistent perceptual lightness. -->
+<defs>
+  <mask id="activity-shape" maskUnits="userSpaceOnUse" x="0" y="0" width="326" height="144" style="mask-type:alpha"><path d="M163 26H165.984H168.968H171.953H174.937H177.921H180.905H183.89H186.874H189.858H192.842H195.826H198.811H201.795H204.779H207.763H210.747H213.732H216.716H219.7H222.684H225.669H228.653H231.637H234.621H237.605H240.59H243.574H246.558H249.542H252.527L255.511 26.025L258.488 26.219L261.446 26.607L264.373 27.185L267.257 27.952L270.085 28.904L272.845 30.037L275.525 31.347L278.116 32.828L280.604 34.474L282.981 36.278L285.236 38.232L287.36 40.328L289.343 42.557L291.177 44.91L292.855 47.377L294.37 49.948L295.714 52.611L296.883 55.356L297.872 58.172L298.676 61.045L299.293 63.964L299.718 66.917L299.952 69.892L299.992 72.875L299.838 75.855L299.492 78.819L298.954 81.753L298.227 84.647L297.314 87.488L296.219 90.263L294.946 92.962L293.501 95.572L291.89 98.084L290.119 100.485L288.197 102.767L286.13 104.919L283.928 106.933L281.601 108.799L279.157 110.511L276.608 112.061L273.963 113.442L271.234 114.649L268.433 115.677L265.571 116.521L262.661 117.177L259.714 117.644L256.743 117.918L253.76 118H250.776H247.792H244.807H241.823H238.839H235.855H232.87H229.886H226.902H223.918H220.934H217.949H214.965H211.981H208.997H206.012H203.028H200.044H197.06H194.076H191.091H188.107H185.123H182.139H179.155H176.17H173.186H170.202H167.218H164.233H161.249H158.265H155.281H152.297H149.312H146.328H143.344" stroke="white" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></mask>
+  <radialGradient id="activity-tone" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="1" gradientTransform="translate(163 26) scale(180 78)">
+    <stop offset="0" stop-color="#D96227"/>
+    <stop offset=".55" stop-color="#DB5F3A"/>
+    <stop offset="1" stop-color="#DC5C47"/>
+  </radialGradient>
+  <radialGradient id="activity-tip">
+    <stop offset="0" stop-color="#DC5C47"/>
+    <stop offset=".3" stop-color="#DC5C47"/>
+    <stop offset="1" stop-color="#DC5C47" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<g mask="url(#activity-shape)">
+  <path d="M0 0H326V144H0Z" fill="url(#activity-tone)"/>
+  <circle cx="143.344" cy="118" r="62" fill="url(#activity-tip)"/>
+</g>
+</svg>

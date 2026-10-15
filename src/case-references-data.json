@@ -1,0 +1,209 @@
+{
+  "3": [
+    {
+      "file": "mobbin-myfitnesspal-today.webp",
+      "label": "MyFitnessPal — Today · калории и БЖУ",
+      "source": "https://mobbin.com/screens/32b82d20-deb0-493f-a643-c170d9e46b8b",
+      "width": 1179,
+      "height": 2676
+    },
+    {
+      "file": "mobbin-lifesum-diary.webp",
+      "label": "Lifesum — Diary · баланс дня",
+      "source": "https://mobbin.com/screens/08ea598e-7236-4baa-854c-6bda65bad2a7",
+      "width": 1180,
+      "height": 2676
+    },
+    {
+      "file": "mobbin-gentler-streak-home.webp",
+      "label": "Gentler Streak — Home · вывод и рекомендации",
+      "source": "https://mobbin.com/screens/89addee0-a199-4220-bf7c-5fc6b916e1da",
+      "width": 1179,
+      "height": 2676
+    },
+    {
+      "file": "mobbin-gentler-streak-action.webp",
+      "label": "Gentler Streak — Go Gentler · карточка действия",
+      "source": "https://mobbin.com/screens/05a2e8a3-f043-4b99-977d-a06b0e4e0c22",
+      "width": 1180,
+      "height": 2676
+    },
+    {
+      "file": "mobbin-oura-activity.webp",
+      "label": "Oura — Today · цель активности",
+      "source": "https://mobbin.com/screens/18b56d2c-559a-4eaa-99f4-67fbd35a14bd",
+      "width": 1179,
+      "height": 2676
+    },
+    {
+      "file": "mobbin-oura-contributors.webp",
+      "label": "Oura — Readiness · факторы",
+      "source": "https://mobbin.com/screens/aba0560d-220a-4b2c-9700-d603272c67f7",
+      "width": 1179,
+      "height": 2676
+    }
+  ],
+  "4": [
+    {
+      "file": "myfitnesspal-progress-overview.png",
+      "label": "MyFitnessPal — динамика показателей",
+      "source": "https://support.myfitnesspal.com/hc/en-us/articles/45246617814669-Introducing-Progress-Overview-Your-Progress-Personalized",
+      "width": 388,
+      "height": 800
+    }
+  ],
+  "5": [
+    {
+      "file": "a8fca4da-5640-41e8-bd8d-381bd007e0f3.jpg",
+      "label": "Headway · сводка + переход",
+      "source": "https://mobbin.com/screens/a8fca4da-5640-41e8-bd8d-381bd007e0f3",
+      "width": 1179,
+      "height": 2676
+    },
+    {
+      "file": "00df16fe-ab17-4a0a-bf37-e632017f64bd.jpg",
+      "label": "Brilliant · результат + действие",
+      "source": "https://mobbin.com/screens/00df16fe-ab17-4a0a-bf37-e632017f64bd",
+      "width": 1180,
+      "height": 2676
+    },
+    {
+      "file": "9f9ad31c-ec4e-4a7c-98a0-764d40835315.jpg",
+      "label": "Duolingo · квест выходных",
+      "source": "https://mobbin.com/screens/9f9ad31c-ec4e-4a7c-98a0-764d40835315",
+      "width": 1179,
+      "height": 2676
+    },
+    {
+      "file": "d8ce4c68-ad5c-4400-a957-10a4d8befa2f.jpg",
+      "label": "Finch · история развивается",
+      "source": "https://mobbin.com/screens/d8ce4c68-ad5c-4400-a957-10a4d8befa2f",
+      "width": 1179,
+      "height": 2676
+    },
+    {
+      "file": "duolingo-user-reference.png",
+      "label": "Duolingo — выбранная пользователем сводка",
+      "source": "https://www.figma.com/design/ro6WLQDrbVVEfoo1wWvEoE?node-id=21-594",
+      "width": 458,
+      "height": 596,
+      "wide": true
+    },
+    {
+      "file": "ef4aab61-b37e-465f-a45c-a0de874c9ffa.jpg",
+      "label": "Brilliant · дни и итог",
+      "source": "https://mobbin.com/screens/ef4aab61-b37e-465f-a45c-a0de874c9ffa",
+      "width": 1179,
+      "height": 2676
+    },
+    {
+      "file": "fb0dd69e-4641-4853-845b-cf723882a462.jpg",
+      "label": "Duolingo · Year in Review",
+      "source": "https://mobbin.com/screens/fb0dd69e-4641-4853-845b-cf723882a462",
+      "width": 1180,
+      "height": 2676
+    },
+    {
+      "file": "0498243e-0e37-44a6-b90e-58a925548fdd.jpg",
+      "label": "Brilliant · следующий шаг",
+      "source": "https://mobbin.com/screens/0498243e-0e37-44a6-b90e-58a925548fdd",
+      "width": 1180,
+      "height": 2676
+    },
+    {
+      "file": "81b67776-4a5d-40d9-860e-9b3b4122357a.jpg",
+      "label": "Duolingo · персональная сводка",
+      "source": "https://mobbin.com/screens/81b67776-4a5d-40d9-860e-9b3b4122357a",
+      "width": 1180,
+      "height": 2676
+    },
+    {
+      "file": "db515e34-0a3a-4369-93ba-d2224676d4cf.jpg",
+      "label": "Duolingo · общий прогресс",
+      "source": "https://mobbin.com/screens/db515e34-0a3a-4369-93ba-d2224676d4cf",
+      "width": 1179,
+      "height": 2676
+    },
+    {
+      "file": "30e202bf-259b-4d41-83de-4adebaaa892a.jpg",
+      "label": "Duolingo · цель достигнута",
+      "source": "https://mobbin.com/screens/30e202bf-259b-4d41-83de-4adebaaa892a",
+      "width": 1179,
+      "height": 2676
+    },
+    {
+      "file": "6a1c4b19-d870-48d7-9150-affb06a5d869.jpg",
+      "label": "Finch · цель и обратная связь",
+      "source": "https://mobbin.com/screens/6a1c4b19-d870-48d7-9150-affb06a5d869",
+      "width": 1179,
+      "height": 2676
+    },
+    {
+      "file": "e7f40efd-01a8-4f03-828e-31db0c35dbc2.jpg",
+      "label": "Finch · карточка распорядка",
+      "source": "https://mobbin.com/screens/e7f40efd-01a8-4f03-828e-31db0c35dbc2",
+      "width": 1179,
+      "height": 2676
+    },
+    {
+      "file": "5bf096b8-4791-49a3-8a43-5251519aa0ef.jpg",
+      "label": "Brilliant · доступ к лиге",
+      "source": "https://mobbin.com/screens/5bf096b8-4791-49a3-8a43-5251519aa0ef",
+      "width": 1179,
+      "height": 2676
+    },
+    {
+      "file": "b7fa7b42-bea8-4d9d-b89f-1042779ffb17.jpg",
+      "label": "Headway · та же мини-сводка",
+      "source": "https://mobbin.com/screens/b7fa7b42-bea8-4d9d-b89f-1042779ffb17",
+      "width": 1179,
+      "height": 2676
+    }
+  ],
+  "6": [
+    {
+      "file": "progress-tracks-user-reference.png",
+      "label": "Пользовательский референс — дорожки активности",
+      "source": "https://www.figma.com/design/ro6WLQDrbVVEfoo1wWvEoE?node-id=37-1147",
+      "width": 924,
+      "height": 1280,
+      "wide": true
+    }
+  ],
+  "7": [
+    {
+      "file": "liquid-progress-user-reference.png",
+      "label": "Пользовательский референс — круг с волной",
+      "source": "",
+      "width": 736,
+      "height": 920,
+      "wide": true
+    }
+  ],
+  "9": [
+    {
+      "file": "illustration-path.png",
+      "label": "Иллюстрация — путь и ежедневные привычки",
+      "source": "",
+      "width": 676,
+      "height": 676,
+      "wide": true
+    },
+    {
+      "file": "illustration-checks.png",
+      "label": "Иллюстрация — выполненные шаги",
+      "source": "",
+      "width": 1560,
+      "height": 2080,
+      "wide": true
+    },
+    {
+      "file": "illustration-health.png",
+      "label": "Иллюстрация — здоровье и измерения",
+      "source": "",
+      "width": 780,
+      "height": 1040,
+      "wide": true
+    }
+  ]
+}
