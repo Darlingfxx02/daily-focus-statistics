@@ -50,7 +50,6 @@ export function setupCaseTour(adapter: CaseAppAdapter): () => void {
   let travel = 0;
   let lastFrame = 0;
   let initialized = false;
-  let copyAnimation: Animation | undefined;
   let effectsFrame = 0;
   let drawArrows = false;
   let geometryDirty = true;
@@ -66,28 +65,14 @@ export function setupCaseTour(adapter: CaseAppAdapter): () => void {
   const inert = (node: HTMLElement, value: boolean) => { if (node.inert !== value) node.inert = value; };
   const data = (node: HTMLElement, key: string, value: string) => { if (node.dataset[key] !== value) node.dataset[key] = value; };
 
-  function cancelCopy(): void {
-    copyAnimation?.cancel();
-    copyAnimation = undefined;
-    copy.style.opacity = '1';
-  }
-
-  function changeCopy(index: number, immediate: boolean): void {
-    cancelCopy();
+  function changeCopy(index: number): void {
     const scene = caseScenes[index];
-    // Publish the latest copy synchronously. Never leave the text hidden while
-    // waiting for a cancelled outgoing animation during rapid navigation.
+    // Reading content never participates in opacity/compositor animations.
+    // Commit the complete next step synchronously, independently of the phones.
     title.textContent = scene.title;
     body.innerHTML = scene.paragraphs.map(paragraph => `<p>${paragraph}</p>`).join('');
     copy.scrollTop = 0;
     panel.querySelector('[data-tour-position]')!.textContent = `${index + 2} / ${caseScenes.length + 1}`;
-    if (!immediate && !reduced.matches) {
-      const animation = copy.animate([{ opacity: .65 }, { opacity: 1 }], { duration: 240, easing: 'ease-out' });
-      copyAnimation = animation;
-      animation.onfinish = () => {
-        if (copyAnimation === animation) { animation.cancel(); copyAnimation = undefined; }
-      };
-    }
   }
 
   const highlights = createCaseEffects(stage);
@@ -109,10 +94,9 @@ export function setupCaseTour(adapter: CaseAppAdapter): () => void {
 
   function enter(index: number, force = false): void {
     if (index === current && !force) return;
-    const first = current < 0;
     current = index;
     const scene = caseScenes[index];
-    void changeCopy(index, first || force);
+    changeCopy(index);
     previous.disabled = false;
     previous.setAttribute('aria-label', index === 0 ? 'Вернуться к гипотезе' : 'Предыдущий шаг');
     next.setAttribute('aria-label', index === caseScenes.length - 1 ? 'Перейти к хронологии' : 'Следующий шаг');
@@ -186,26 +170,21 @@ export function setupCaseTour(adapter: CaseAppAdapter): () => void {
     style(after, 'transform', `translate3d(${layout.soloOffset * (1 - (reduced.matches ? Number(reveal >= .5) : reveal))}px,0,0)`);
     const label = reveal < .5 ? 'Результат' : 'После';
     if (caption.textContent !== label) caption.textContent = label;
-    const introOpacity = 1 - smoothStep(reveal / .55);
-    const panelOpacity = smoothStep((reveal - .55) / .45) * (1 - smoothStep(logProgress * 4));
     [intro, panel].forEach(node => {
       style(node, 'left', `${layout.text.x}px`); style(node, 'top', `${layout.text.y}px`);
       style(node, 'width', `${layout.text.width}px`); style(node, 'height', `${layout.text.height}px`);
     });
-    style(intro, 'opacity', String(introOpacity));
-    style(intro, 'visibility', introOpacity > .001 ? 'visible' : 'hidden');
-    inert(intro, reveal > .1);
-    style(panel, 'opacity', String(panelOpacity));
-    style(panel, 'visibility', panelOpacity > .001 ? 'visible' : 'hidden');
-    inert(panel, logProgress > .1 || reveal < .95);
     style(story, 'width', `${layout.logWidth}px`);
     let index = compactMode ? buttonIndex : revealTarget > .55 ? 0 : -1;
     if (!compactMode) geometry.stopTops.forEach((top, i) => { if (top - window.scrollY <= height * .4) index = i; });
+    // One readable panel at a time, without a transparent intermediate state.
+    // Use the selected step, not the delayed motion of the device pair.
+    intro.hidden = index >= 0 || logProgress > .1;
+    panel.hidden = index < 0 || logProgress > .1;
     if (requested === index || logProgress > 0) requested = null;
     if (logProgress === 0 && index >= 0) enter(index, oldLog > 0);
     else if (index < 0 && current >= 0) {
       current = -1;
-      cancelCopy();
       running?.abort();
       if (!free) {
         running = new AbortController();
@@ -360,7 +339,7 @@ export function setupCaseTour(adapter: CaseAppAdapter): () => void {
   return () => {
     disposeScrollbars();
     viewer.dispose();
-    running?.abort(); cancelCopy(); cancelAnimationFrame(frame); cancelAnimationFrame(effectsFrame); cancelPageTravel(); resize.disconnect();
+    running?.abort(); cancelAnimationFrame(frame); cancelAnimationFrame(effectsFrame); cancelPageTravel(); resize.disconnect();
     highlights.dispose();
     presentation.removeEventListener('click', onClick);
     stage.removeEventListener('scroll', innerScroll, true);
