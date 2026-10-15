@@ -8,6 +8,8 @@ import { createPrototypeViewer } from './prototype-viewer';
 
 export function setupCaseTour(adapter: CaseAppAdapter): () => void {
   const stage = document.querySelector<HTMLElement>('.comparison-stage')!;
+  const presentation = stage.closest<HTMLElement>('.case-presentation')!;
+  const canvas = stage.closest<HTMLElement>('.case-canvas')!;
   const pair = stage.querySelector<HTMLElement>('.compare-devices')!;
   const track = document.querySelector<HTMLElement>('.tour-track')!;
   const previews = [...stage.querySelectorAll<HTMLElement>('.case-preview')];
@@ -26,6 +28,9 @@ export function setupCaseTour(adapter: CaseAppAdapter): () => void {
   const next = panel.querySelector<HTMLButtonElement>('[data-tour="next"]')!;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let current = -1;
+  let compactMode = false;
+  let buttonIndex = -1;
+  let mobileStory = location.hash === '#decision-chronology';
   let requested: number | null = null;
   let free = false;
   let logProgress = 0;
@@ -122,6 +127,19 @@ export function setupCaseTour(adapter: CaseAppAdapter): () => void {
     if (viewer.isOpen) return;
     const resized = geometryDirty;
     if (resized) {
+      const wasCompact = compactMode;
+      compactMode = stage.clientWidth < 960;
+      if (compactMode !== wasCompact) {
+        buttonIndex = current;
+        if (compactMode && initialized) mobileStory = logProgress > 0;
+        cancelPageTravel();
+      }
+      // Mobile uses explicit steps, not a stack of viewport-height scroll
+      // triggers. Only the explanation scrolls until chronology is opened.
+      data(stage, 'compact', String(compactMode));
+      data(presentation, 'compact', String(compactMode));
+      data(canvas, 'compact', String(compactMode));
+      story.hidden = compactMode && !mobileStory;
       // Read all layout once, before writes. Scroll positions then use cached
       // document coordinates instead of forcing layout eight times per frame.
       geometry = {
@@ -131,13 +149,16 @@ export function setupCaseTour(adapter: CaseAppAdapter): () => void {
         stopTops: stops.map(stop => stop.getBoundingClientRect().top + window.scrollY),
       };
       geometryDirty = false;
+      if (initialized && compactMode !== wasCompact) {
+        window.scrollTo({ top: compactMode ? (mobileStory ? geometry.storyTop : 0) : (mobileStory ? geometry.storyTop : geometry.stopTops[current] ?? geometry.trackTop), behavior: 'instant' });
+      }
     }
     const { height, width } = geometry;
     const oldLog = logProgress;
     const oldReveal = reveal, oldTravel = travel;
-    logProgress = clamp((height * 1.65 - (geometry.storyTop - window.scrollY)) / (height * .7));
+    logProgress = compactMode ? 0 : clamp((height * 1.65 - (geometry.storyTop - window.scrollY)) / (height * .7));
     const scroll = Math.max(0, window.scrollY - geometry.trackTop);
-    const revealTarget = smoothStep((scroll / height - .08) / .5);
+    const revealTarget = compactMode ? Number(buttonIndex >= 0) : smoothStep((scroll / height - .08) / .5);
     const travelTarget = smoothStep((logProgress - .25) / .75);
     const elapsed = Math.min(64, now - lastFrame || 16);
     lastFrame = now;
@@ -171,8 +192,8 @@ export function setupCaseTour(adapter: CaseAppAdapter): () => void {
     style(panel, 'visibility', panelOpacity > .001 ? 'visible' : 'hidden');
     inert(panel, logProgress > .1 || reveal < .95);
     style(story, 'width', `${layout.logWidth}px`);
-    let index = revealTarget > .55 ? 0 : -1;
-    geometry.stopTops.forEach((top, i) => { if (top - window.scrollY <= height * .4) index = i; });
+    let index = compactMode ? buttonIndex : revealTarget > .55 ? 0 : -1;
+    if (!compactMode) geometry.stopTops.forEach((top, i) => { if (top - window.scrollY <= height * .4) index = i; });
     if (requested === index || logProgress > 0) requested = null;
     if (logProgress === 0 && index >= 0) enter(index, oldLog > 0);
     else if (index < 0 && current >= 0) {
@@ -213,6 +234,7 @@ export function setupCaseTour(adapter: CaseAppAdapter): () => void {
   }
   function onWheel(event: WheelEvent): void {
     if (viewer.isOpen) return;
+    if (compactMode) return;
     if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || !event.deltaY || Math.abs(event.deltaX) >= Math.abs(event.deltaY)) return;
     const target = event.target instanceof Element ? event.target : null;
     // Do not take over zooming, a modal, long copy or the interactive app.
@@ -235,6 +257,23 @@ export function setupCaseTour(adapter: CaseAppAdapter): () => void {
   }
   function jump(index: number): void {
     cancelPageTravel();
+    if (compactMode) {
+      mobileStory = index === caseScenes.length;
+      story.hidden = !mobileStory;
+      geometryDirty = true;
+      if (mobileStory) {
+        // The long work log remains a regular page with its own return action.
+        (document.activeElement as HTMLElement | null)?.blur();
+        update();
+        window.scrollTo({ top: geometry.storyTop, behavior: reduced.matches ? 'instant' : 'smooth' });
+      } else {
+        buttonIndex = index;
+        if (index < 0) intro.querySelector('.intro-copy')!.scrollTop = 0;
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        update();
+      }
+      return;
+    }
     requested = index;
     // The outgoing controls become inert during the hand-off. Release their
     // focus before scrolling so the browser cannot pull the page back to them.
@@ -257,6 +296,7 @@ export function setupCaseTour(adapter: CaseAppAdapter): () => void {
   const onKey = (event: KeyboardEvent) => { if (['PageDown', 'PageUp', 'Home', 'End', 'ArrowDown', 'ArrowUp', ' '].includes(event.key)) cancelPageTravel(); };
   const onClick = (event: Event) => {
     const action = (event.target as Element).closest<HTMLElement>('[data-tour]')?.dataset.tour;
+    if (action === 'resume') jump(buttonIndex);
     if (action === 'start' || action === 'chronology') {
       event.preventDefault();
       (event.target as Element).closest<HTMLElement>('[data-tour]')?.blur();
@@ -276,21 +316,29 @@ export function setupCaseTour(adapter: CaseAppAdapter): () => void {
     }
   };
   const viewer = createPrototypeViewer(previews[1], () => {
+    const readingTop = copy.scrollTop;
     free = false;
     geometryDirty = true;
     lastFrame = 0;
     update();
-    if (current >= 0) enter(current, true);
+    if (current >= 0) {
+      enter(current, true);
+      copy.scrollTop = readingTop;
+    }
     else {
       running = new AbortController();
       const signal = running.signal;
       void adapter.enter(caseScenes[0], signal, () => {}).catch(error => { if (!signal.aborted) console.error(error); });
     }
   });
-  const innerScroll = () => { if (free || logProgress > 0) return; effects(); };
+  const innerScroll = (event: Event) => {
+    // Reading a long explanation never moves the phones or redraws highlights.
+    if (free || logProgress > 0 || (event.target instanceof Element && event.target.closest('.tour-copy, .intro-copy'))) return;
+    effects();
+  };
   const resizeGeometry = () => { cancelPageTravel(); geometryDirty = true; schedule(); };
   const onPageScroll = () => { if (!wheelMotion) schedule(); };
-  stage.addEventListener('click', onClick);
+  presentation.addEventListener('click', onClick);
   stage.addEventListener('scroll', innerScroll, true);
   window.addEventListener('scroll', onPageScroll, { passive: true });
   window.addEventListener('resize', resizeGeometry);
@@ -306,7 +354,7 @@ export function setupCaseTour(adapter: CaseAppAdapter): () => void {
     viewer.dispose();
     running?.abort(); cancelCopy(); cancelAnimationFrame(frame); cancelAnimationFrame(effectsFrame); cancelPageTravel(); resize.disconnect();
     highlights.dispose();
-    stage.removeEventListener('click', onClick);
+    presentation.removeEventListener('click', onClick);
     stage.removeEventListener('scroll', innerScroll, true);
     window.removeEventListener('scroll', onPageScroll);
     window.removeEventListener('resize', resizeGeometry);

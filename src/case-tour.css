@@ -44,6 +44,18 @@
   .case-canvas { padding: 0 24px 64px; }
 }
 .comparison-stage[data-compact="true"] .compare-devices { gap: 12px; }
+.case-canvas[data-compact="true"] { padding-bottom: 0; }
+.case-presentation[data-compact="true"] .tour-track,
+.case-presentation[data-compact="true"] .tour-exit,
+.case-story[hidden] { display: none; }
+.comparison-stage[data-compact="true"] { position: relative; }
+.comparison-stage[data-compact="true"] .tour-copy,
+.comparison-stage[data-compact="true"] .intro-copy { padding-bottom: 16px; scroll-padding-block: 12px; touch-action: pan-y; }
+.comparison-stage[data-compact="true"] .case-intro,
+.comparison-stage[data-compact="true"] .tour-explanation { padding-bottom: env(safe-area-inset-bottom, 0px); }
+.tour-copy:focus-visible, .intro-copy:focus-visible { outline: 2px solid #737373; outline-offset: 3px; border-radius: 4px; }
+.chronology-back { display: none; }
+.case-presentation[data-compact="true"] .chronology-back { display: block; min-height: 44px; padding: 0 16px; margin-bottom: 24px; border-radius: 100px; background: #f2f2f2; color: #404040; font-size: 16px; }
 .comparison-stage[data-compact="true"] .tour-controls { margin-top: 12px; }
 .comparison-stage[data-compact="true"] .tour-instruction { display: none; }
 .comparison-stage[data-compact="true"] .tour-copy h2 { margin-bottom: 12px; }

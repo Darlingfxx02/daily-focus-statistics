@@ -6,7 +6,7 @@ import { createCaseAdapter, scrollDestination } from '../src/case-app-adapter.ts
 import { advancePosition, follow, smoothStep } from '../src/case-motion.ts';
 
 test('paired phones stay inside the stage; desktop copy and chronology have their own columns', () => {
-  for (const [width, height] of [[1344, 900], [1050, 768], [960, 650], [700, 800], [350, 740], [280, 600]]) {
+  for (const [width, height] of [[1344, 900], [1050, 768], [960, 650], [700, 800], [350, 740], [280, 600], [350, 844], [700, 390]]) {
     const initial = comparisonLayout(width, height, 0);
     for (const progress of [0, .5, 1]) {
       const layout = comparisonLayout(width, height, progress);
@@ -16,6 +16,11 @@ test('paired phones stay inside the stage; desktop copy and chronology have thei
       assert.equal(layout.pair.width, initial.pair.width, 'scroll must not resize the phones');
       assert.equal(layout.pair.height, initial.pair.height);
       assert.deepEqual(layout.text, initial.text, 'the text/control area stays anchored');
+      if (layout.compact) {
+        assert.ok(layout.pair.y + layout.pair.height + 20 <= layout.text.y, 'mobile copy stays below both fixed phones');
+        assert.ok(layout.text.y + layout.text.height <= height, 'mobile controls stay inside the viewport');
+        assert.ok(layout.text.height >= 200, 'reserve room for scrollable copy and two rows of controls');
+      }
       if (!layout.compact && progress === 0) assert.ok(layout.pair.width + 32 <= layout.text.x);
       if (!layout.compact && progress === 1) assert.ok(layout.logWidth + 32 <= layout.pair.x);
     }

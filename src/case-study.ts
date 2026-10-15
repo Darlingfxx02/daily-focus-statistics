@@ -93,9 +93,9 @@ const stages = [
 ];
 
 export function caseIntroduction(): string {
-  return `<header class="case-intro"><div class="intro-copy"><h1>Гипотеза: три фокуса</h1><p>Если система выбирает три фокуса под потребности человека, то цели кажутся посильнее и выполняются чаще.</p><p>Проверим по доле выполненных фокусов за день.</p><p><a href="#decision-chronology" data-tour="chronology">Хронология решений</a></p></div>${tourNavigation(true)}</header>`;
+  return `<header class="case-intro"><div class="intro-copy" tabindex="0" role="region" aria-label="Гипотеза проекта"><h1>Гипотеза: три фокуса</h1><p>Если система выбирает три фокуса под потребности человека, то цели кажутся посильнее и выполняются чаще.</p><p>Проверим по доле выполненных фокусов за день.</p><p><a href="#decision-chronology" data-tour="chronology">Хронология решений</a></p></div>${tourNavigation(true)}</header>`;
 }
 
 export function decisionChronology(): string {
-  return `<article class="case-story" aria-label="Обоснование и хронология решения"><section class="case-stage" id="decision-chronology" aria-labelledby="chronology-title"><h2 id="chronology-title">Как мы пришли к «Фокусу дня»</h2><p>Итоговая версия · 16 октября 2026.</p></section>${stages.map((stage, index) => `<section class="case-stage" aria-labelledby="stage-${index + 1}"><h2 id="stage-${index + 1}">${stage.title}</h2>${stage.paragraphs.map(paragraph => `<p>${paragraph}</p>`).join('')}${iterationStrip(index + 1)}${referenceStrip(index + 1)}</section>`).join('')}</article>`;
+  return `<article class="case-story" aria-label="Обоснование и хронология решения"><section class="case-stage" id="decision-chronology" aria-labelledby="chronology-title"><button type="button" class="chronology-back" data-tour="resume">← К разбору экрана</button><h2 id="chronology-title">Как мы пришли к «Фокусу дня»</h2><p>Итоговая версия · 16 октября 2026.</p></section>${stages.map((stage, index) => `<section class="case-stage" aria-labelledby="stage-${index + 1}"><h2 id="stage-${index + 1}">${stage.title}</h2>${stage.paragraphs.map(paragraph => `<p>${paragraph}</p>`).join('')}${iterationStrip(index + 1)}${referenceStrip(index + 1)}</section>`).join('')}</article>`;
 }

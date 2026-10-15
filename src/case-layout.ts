@@ -7,13 +7,16 @@ export function comparisonLayout(width: number, height: number, logProgress: num
   const gap = compact ? 12 : 20;
   const caption = 36;
   if (compact) {
-    const textHeight = Math.min(330, height * .4);
-    const availableHeight = Math.max(180, height - textHeight - 84);
-    const phoneWidth = Math.min((width - gap) / 2, availableHeight * ratio);
+    // Reserve the same upper slot for one or two phones. Copy gets the
+    // remaining space below it, including its fixed navigation controls.
+    const phoneArea = Math.min(height * .5, Math.max(116, height - 260));
+    const phoneWidth = Math.min((width - gap) / 2, (phoneArea - caption) * ratio);
     const pairWidth = phoneWidth * 2 + gap;
+    const pairHeight = phoneWidth / ratio + caption;
+    const textTop = 12 + pairHeight + 24;
     return {
-      pair: { x: (width - pairWidth) / 2, y: textHeight + 28, width: pairWidth, height: phoneWidth / ratio + caption },
-      text: { x: 0, y: 8, width, height: textHeight },
+      pair: { x: (width - pairWidth) / 2, y: 12, width: pairWidth, height: pairHeight },
+      text: { x: 0, y: textTop, width, height: height - textTop - 16 },
       logWidth: width, compact, soloOffset: -(phoneWidth + gap) / 2,
     };
   }
