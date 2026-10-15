@@ -192,7 +192,7 @@ img { display: block; }
   .scroll-fade::after { background: linear-gradient(var(--fade-direction), var(--fade-surface) 0%, var(--fade-surface) 65%, transparent); }
 }
 .bottom-scroll-fade::after { background: linear-gradient(to bottom, rgb(255 255 255 / 0), rgb(255 255 255 / .8)); }
-.tabbar { position: absolute; left: 50%; bottom: var(--nav-bottom); transform: translateX(-50%); width: min(300px, calc(100% - 32px)); height: var(--nav-height); padding: 8px 12px; border: 1px solid #e7edf7; border-radius: 999px; background: #fffffff0; box-shadow: 0 8px 28px #173f7326, 0 2px 6px #173f730a; z-index: 2; }
+.tabbar { position: absolute; left: 50%; bottom: var(--nav-bottom); transform: translateX(-50%); width: min(300px, calc(100% - 32px)); height: var(--nav-height); padding: 8px 12px; border: 1px solid #e7edf7; border-radius: 999px; background: #fff; box-shadow: 0 8px 28px #173f7326, 0 2px 6px #173f730a; z-index: 2; }
 .tabbar-items { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: center; height: 100%; }
 .tab { min-width: 0; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; border-radius: 28px; color: #71839c; }
 .tab.active { color: var(--blue); }
