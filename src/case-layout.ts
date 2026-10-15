@@ -2,8 +2,7 @@ export interface Rect { x: number; y: number; width: number; height: number }
 export interface ComparisonLayout { pair: Rect; text: Rect; logWidth: number; compact: boolean; soloOffset: number }
 const ratio = 1470 / 3000;
 
-export function comparisonLayout(width: number, height: number, logProgress: number): ComparisonLayout {
-  const compact = width < 960;
+export function comparisonLayout(width: number, height: number, logProgress: number, compact = width < 960): ComparisonLayout {
   const gap = compact ? 12 : 20;
   const caption = 36;
   if (compact) {

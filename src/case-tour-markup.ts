@@ -7,7 +7,7 @@ export function beforeDevice(): string {
 }
 
 export function tourPanel(): string {
-  return `<div class="tour-explanation"><div class="tour-copy" tabindex="0" role="region" aria-label="Описание этапа" aria-live="polite"><div class="tour-copy-content"><h2 id="tour-title"></h2><div id="tour-body"></div></div></div>${tourNavigation()}</div>`;
+  return `<div class="tour-explanation"><div class="copy-scroll-area"><div class="tour-copy" tabindex="0" role="region" aria-label="Описание этапа" aria-live="polite"><div class="tour-copy-content"><h2 id="tour-title"></h2><div id="tour-body"></div></div></div></div>${tourNavigation()}</div>`;
 }
 
 export function tourNavigation(intro = false): string {

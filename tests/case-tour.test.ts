@@ -41,6 +41,19 @@ test('pose smoothing is monotonic, settles exactly and reverses without a reset'
   assert.equal(smoothStep(2), 1);
 });
 
+test('scrollbar-sized changes in available width never override the selected viewport mode', () => {
+  // Around the old 960px stage threshold, hiding/showing a 15px system
+  // scrollbar must not toggle the presentation and its scroll track again.
+  for (const compact of [true, false]) {
+    for (const width of [954, 960, 969]) {
+      const layout = comparisonLayout(width, 898, 0, compact);
+      assert.equal(layout.compact, compact);
+      if (compact) assert.ok(layout.text.y > layout.pair.y + layout.pair.height);
+      else assert.ok(layout.text.x > layout.pair.x + layout.pair.width);
+    }
+  }
+});
+
 test('all scenes have independent destinations and original highlights stay inside the source frame', () => {
   assert.equal(new Set(caseScenes.map(scene => scene.id)).size, caseScenes.length);
   for (const scene of caseScenes) {

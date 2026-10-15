@@ -5,6 +5,7 @@ import { createCaseEffects } from './case-effects';
 import { clamp, follow, smoothStep } from './case-motion';
 import { CaseWheelMotion, wheelPixels } from './case-wheel';
 import { createPrototypeViewer } from './prototype-viewer';
+import { setupCopyScrollbars } from './case-scrollbar';
 
 export function setupCaseTour(adapter: CaseAppAdapter): () => void {
   const stage = document.querySelector<HTMLElement>('.comparison-stage')!;
@@ -27,6 +28,11 @@ export function setupCaseTour(adapter: CaseAppAdapter): () => void {
   const previous = panel.querySelector<HTMLButtonElement>('[data-tour="previous"]')!;
   const next = panel.querySelector<HTMLButtonElement>('[data-tour="next"]')!;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  // Match the CSS breakpoint using the viewport, including its scrollbar.
+  // Measuring the stage creates a loop when hiding the desktop scroll track
+  // removes the scrollbar and makes that same stage wide enough for desktop.
+  const compactViewport = matchMedia('(max-width: 1055px)');
+  const disposeScrollbars = setupCopyScrollbars(stage);
   let current = -1;
   let compactMode = false;
   let buttonIndex = -1;
@@ -128,7 +134,7 @@ export function setupCaseTour(adapter: CaseAppAdapter): () => void {
     const resized = geometryDirty;
     if (resized) {
       const wasCompact = compactMode;
-      compactMode = stage.clientWidth < 960;
+      compactMode = compactViewport.matches;
       if (compactMode !== wasCompact) {
         buttonIndex = current;
         if (compactMode && initialized) mobileStory = logProgress > 0;
@@ -149,6 +155,7 @@ export function setupCaseTour(adapter: CaseAppAdapter): () => void {
         stopTops: stops.map(stop => stop.getBoundingClientRect().top + window.scrollY),
       };
       geometryDirty = false;
+      style(stage, '--copy-edge-gap', `${Math.max(0, (document.documentElement.clientWidth - geometry.width) / 2)}px`);
       if (initialized && compactMode !== wasCompact) {
         window.scrollTo({ top: compactMode ? (mobileStory ? geometry.storyTop : 0) : (mobileStory ? geometry.storyTop : geometry.stopTops[current] ?? geometry.trackTop), behavior: 'instant' });
       }
@@ -165,7 +172,7 @@ export function setupCaseTour(adapter: CaseAppAdapter): () => void {
     reveal = !initialized || reduced.matches ? revealTarget : follow(reveal, revealTarget, elapsed);
     travel = !initialized || reduced.matches ? travelTarget : follow(travel, travelTarget, elapsed);
     initialized = true;
-    const layout = comparisonLayout(width, height, reduced.matches ? (travel >= .5 ? 1 : 0) : travel);
+    const layout = comparisonLayout(width, height, reduced.matches ? (travel >= .5 ? 1 : 0) : travel, compactMode);
     data(stage, 'compact', String(layout.compact));
     data(stage, 'mode', free || logProgress > 0 ? 'free' : 'guided');
     previews.forEach(device => inert(device, stage.dataset.mode === 'guided'));
@@ -351,6 +358,7 @@ export function setupCaseTour(adapter: CaseAppAdapter): () => void {
   resize.observe(stage);
   update();
   return () => {
+    disposeScrollbars();
     viewer.dispose();
     running?.abort(); cancelCopy(); cancelAnimationFrame(frame); cancelAnimationFrame(effectsFrame); cancelPageTravel(); resize.disconnect();
     highlights.dispose();

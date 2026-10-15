@@ -93,7 +93,7 @@ const stages = [
 ];
 
 export function caseIntroduction(): string {
-  return `<header class="case-intro"><div class="intro-copy" tabindex="0" role="region" aria-label="Гипотеза проекта"><h1>Гипотеза: три фокуса</h1><p>Если система выбирает три фокуса под потребности человека, то цели кажутся посильнее и выполняются чаще.</p><p>Проверим по доле выполненных фокусов за день.</p><p><a href="#decision-chronology" data-tour="chronology">Хронология решений</a></p></div>${tourNavigation(true)}</header>`;
+  return `<header class="case-intro"><div class="copy-scroll-area"><div class="intro-copy" tabindex="0" role="region" aria-label="Гипотеза проекта"><h1>Гипотеза: три фокуса</h1><p>Если система выбирает три фокуса под потребности человека, то цели кажутся посильнее и выполняются чаще.</p><p>Проверим по доле выполненных фокусов за день.</p><p><a href="#decision-chronology" data-tour="chronology">Хронология решений</a></p></div></div>${tourNavigation(true)}</header>`;
 }
 
 export function decisionChronology(): string {

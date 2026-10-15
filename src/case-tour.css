@@ -1,6 +1,6 @@
 .case-canvas { display: block; width: min(100%, 1440px); margin-inline: auto; padding: 0 48px 100px; font-family: 'Inter Variable', sans-serif; }
-.case-intro { position: absolute; display: flex; flex-direction: column; margin: 0; overflow: hidden; pointer-events: auto; }
-.intro-copy { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; padding-top: max(0px, calc((100svh - 640px) / 2)); }
+.case-intro { position: absolute; display: flex; flex-direction: column; margin: 0; pointer-events: auto; }
+.intro-copy { overflow-y: auto; overscroll-behavior: contain; padding-top: max(0px, calc((100svh - 640px) / 2)); }
 .case-presentation { position: relative; }
 .comparison-stage { position: sticky; top: 0; height: 100svh; z-index: 2; pointer-events: none; }
 .compare-devices { position: absolute; top: 0; left: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; transform-origin: top left; will-change: transform; }
@@ -20,7 +20,16 @@
 .original-screenshot { position: absolute; left: -24px; top: -20px; width: 438px; max-width: none; height: 1286px; user-select: none; }
 .original-anchor { position: absolute; pointer-events: none; }
 .tour-explanation { position: absolute; display: flex; flex-direction: column; pointer-events: auto; opacity: 0; }
-.tour-copy { flex: 1; min-height: 0; display: flex; flex-direction: column; padding-top: max(0px, calc((100svh - 640px) / 2)); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.tour-copy { display: flex; flex-direction: column; padding-top: max(0px, calc((100svh - 640px) / 2)); overflow-y: auto; overscroll-behavior: contain; }
+.copy-scroll-area { position: relative; flex: 1; min-height: 0; margin-right: calc(-1 * var(--copy-edge-gap, 0px)); }
+.intro-copy, .tour-copy { width: 100%; height: 100%; padding-right: var(--copy-edge-gap, 0px); scrollbar-width: none; }
+.intro-copy::-webkit-scrollbar, .tour-copy::-webkit-scrollbar { display: none; }
+.copy-scrollbar { position: absolute; inset: 0 0 0 auto; width: 16px; cursor: default; touch-action: none; user-select: none; }
+.copy-scrollbar[hidden] { display: none; }
+.copy-scrollbar::before { content: ''; position: absolute; inset: 0 0 0 auto; width: 3px; background: #f0f0f0; border-radius: 100px; }
+.copy-scrollbar-thumb { position: absolute; top: 0; right: 0; width: 3px; border-radius: 100px; background: #a3a3a3; }
+.copy-scrollbar:hover .copy-scrollbar-thumb, .copy-scrollbar[data-dragging="true"] .copy-scrollbar-thumb, .copy-scrollbar:focus-visible .copy-scrollbar-thumb { background: #737373; }
+.copy-scrollbar:focus-visible { outline: 2px solid #737373; outline-offset: -2px; border-radius: 4px; }
 .tour-copy-content { flex: none; margin-block: 0; }
 .tour-copy h2 { color: #262626; font-size: 24px; line-height: 32px; font-weight: 600; letter-spacing: -.45px; margin: 0 0 20px; text-wrap: balance; }
 .tour-copy p, .tour-instruction { color: #545454; font-size: 18px; line-height: 30px; }
